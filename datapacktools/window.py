@@ -27,7 +27,7 @@ class Window():
             column = 2*index%rows
 
             label = tk.Label(frame, text=f"{entry}: ")
-            label.grid(row=row, column=column, padx=5, pady=5)
+            label.grid(row=row, column=column, padx=5, pady=5, sticky=tk.E)
             tk_entry = tk.Entry(frame, width=entry_width)
             tk_entry.grid(row=row, column=column+1, padx=5, pady=5)
 

@@ -38,9 +38,7 @@ class Datapack:
             rows=2
         )
         
-        generate_button = tk.Button(self.window.root, text="Generate")
-        generate_button.configure(command=lambda: self._init_generate(entries, options))
-        generate_button.pack(padx=20, pady=10)
+        tk.Button(self.window.root, text="Generate",command=lambda: self._init_generate(entries, options)).pack(padx=20, pady=10)
 
     def _init_generate(self, entries: Dict[str, tk.Entry], options: Dict[str, tk.Checkbutton]) -> None:
         namespace = entries['Namespace'].get().lower().strip().replace(" ", "_")
@@ -74,13 +72,13 @@ class Datapack:
 
         namespaces = [namespace for namespace in os.listdir(os.path.join(self.directory, 'data')) if namespace != 'minecraft']
         if len(namespaces) == 1:
-            namespace_tk = tk.StringVar(value=namespaces[0])
+            self.namespace_tk = tk.StringVar(value=namespaces[0])
         else:
             namespace_frame = tk.LabelFrame(self.window.root, padx=30, pady=20, text=" Choose namespace ")
             namespace_frame.pack(padx=10, pady=10)
-            namespace_tk = tk.StringVar(value=namespaces[0])
+            self.namespace_tk = tk.StringVar(value=namespaces[0])
             for index, name in enumerate(namespaces):
-                tk.Radiobutton(namespace_frame, text=name, variable=namespace_tk, value=name, tristatevalue=0).grid(row=index//2, column=index%2, sticky=tk.W)
+                tk.Radiobutton(namespace_frame, text=name, variable=self.namespace_tk, value=name, tristatevalue=0).grid(row=index//2, column=index%2, sticky=tk.W)
 
         frame = tk.LabelFrame(self.window.root, padx=50, pady=30, text=" Tools ")
         frame.pack(padx=10, pady=10)
