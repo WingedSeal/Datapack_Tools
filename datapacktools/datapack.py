@@ -4,10 +4,14 @@ from typing import Dict
 
 from . import utils
 from . import _init
-from . import tools
+from .tools.custom_floor_crafting import CustomFloorCrafting
 from .window import Window
 
-class Datapack:
+
+
+class Datapack(
+    CustomFloorCrafting
+):
     def __init__(self, directory: str, datapack_name: str, window: Window) -> None:
         self.directory = directory
         self.window = window
@@ -84,16 +88,16 @@ class Datapack:
         frame.pack(padx=10, pady=10)
 
         tk.Button(frame, text="Custom Floor Crafting", height=2, width=20, font=("", 12), 
-            command=lambda: tools.custom_floor_crafting.main(self)
+            command=self.custom_floor_crafting
             ).grid(row=0, column=0, padx=20, pady=10)
         tk.Button(frame, text="Custom Crafting Recipe", height=2, width=20, font=("", 12), 
-            command=lambda: tools.custom_crafting_recipe.main(self)
+            #command=self.custom_floor_crafting
             ).grid(row=0, column=1, padx=20, pady=10)
         tk.Button(frame, text="Melee look_at", height=2, width=20, font=("", 12), 
-            command=lambda: tools.melee_look_at.main(self)
+            #command=lambda: tools.melee_look_at.main(self)
             ).grid(row=1, column=0, padx=20, pady=10)
         tk.Button(frame, text="Melee Raycast", height=2, width=20, font=("", 12), 
-            command=lambda: tools.melee_raycast.main(self)
+            #command=lambda: tools.melee_raycast.main(self)
             ).grid(row=1, column=1, padx=20, pady=10)
 
     def pack_main_menu(self) -> None:
