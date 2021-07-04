@@ -5,14 +5,18 @@ from typing import Dict
 from . import utils
 from . import _init
 from .tools.custom_floor_crafting import CustomFloorCrafting
+from .tools.custom_recipe import CustomRecipe
 from .tools.melee_look_at import MeleeLookAt
+from .tools.melee_raycast import MeleeRaycast
 from .window import Window
 
 
 
 class Datapack(
     CustomFloorCrafting,
-    MeleeLookAt
+    CustomRecipe,
+    MeleeLookAt,
+    MeleeRaycast
 ):
     def __init__(self, directory: str, datapack_name: str, window: Window) -> None:
         self.directory = directory
@@ -93,13 +97,13 @@ class Datapack(
             command=self.custom_floor_crafting
             ).grid(row=0, column=0, padx=20, pady=10)
         tk.Button(frame, text="Custom Crafting Recipe", height=2, width=20, font=("", 12), 
-            #command=self.
+            command=self.custom_recipe
             ).grid(row=0, column=1, padx=20, pady=10)
         tk.Button(frame, text="Melee look_at", height=2, width=20, font=("", 12), 
             command=self.melee_look_at
             ).grid(row=1, column=0, padx=20, pady=10)
         tk.Button(frame, text="Melee Raycast", height=2, width=20, font=("", 12), 
-            #command=lambda: tools.melee_raycast.main(self)
+            command=self.melee_raycast
             ).grid(row=1, column=1, padx=20, pady=10)
 
     def pack_main_menu(self) -> None:
