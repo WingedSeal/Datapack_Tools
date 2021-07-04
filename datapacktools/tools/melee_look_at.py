@@ -105,6 +105,10 @@ tag @s remove {namespace}.potential_looked
     with open(os.path.join(item_function_path, 'exe.mcfunction'), 'w') as exe_file:
         exe_file.write('say [PLACE HOLDER]')
 
+    subdatapack.window.clear()
+    subdatapack.window.label(f'Melee look_at is successfully generated under {namespace}/{subfolder} with item nbt: "{{{item_nbt}}}."', 16, (20,10))
+    subdatapack.pack_main_menu()
+
 class MeleeLookAt:
 
     def melee_look_at(self):
