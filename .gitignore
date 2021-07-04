@@ -1,6 +1,8 @@
 #Custom
 TEST/
+output/
 to_exe_config.json
+main_test.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

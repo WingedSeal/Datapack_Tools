@@ -1,8 +1,7 @@
 import datapacktools as dpt
 import os, sys
 
-EXE_DIRECTORY = os.path.join(os.path.dirname(sys.argv[0]), 'TEST', 'datapacks', 'my_datapack')
-#EXE_DIRECTORY = os.path.dirname(sys.argv[0])
+EXE_DIRECTORY = os.path.dirname(sys.argv[0])
 
 def run(window: dpt.Window) -> None:
     if not dpt.path.is_valid(EXE_DIRECTORY):
