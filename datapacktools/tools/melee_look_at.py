@@ -15,15 +15,11 @@ def generate(subdatapack: SubDatapack, entries: dict):
         item_nbt+=':1b'
 
     #---- MAKE PATHS----
-    if not os.path.exists(os.path.join(namespace_path, 'predicates', subfolder, 'selecteditem')):
-        os.makedirs(os.path.join(namespace_path, 'predicates', subfolder, 'selecteditem'))
-    if not os.path.exists(os.path.join(namespace_path, 'predicates', subfolder, 'utils')):
-        os.makedirs(os.path.join(namespace_path, 'predicates', subfolder, 'utils'))
-    if not os.path.exists(os.path.join(namespace_path, 'advancements', subfolder, 'utils', 'look_at')):
-        os.makedirs(os.path.join(namespace_path, 'advancements', subfolder, 'utils', 'look_at'))
-    item_function_path = os.path.join(namespace_path, 'functions', subfolder, 'look_at', item_name)
-    if not os.path.exists(item_function_path):
-        os.makedirs(item_function_path)
+    _path.makedirs(namespace_path, 'predicates', subfolder, 'selecteditem')
+    _path.makedirs(namespace_path, 'predicates', subfolder, 'utils')
+    _path.makedirs(namespace_path, 'advancements', subfolder, 'utils', 'melee_look_at')
+    item_function_path = os.path.join(namespace_path, 'functions', subfolder, 'melee_look_at', item_name)
+    _path.makedirs(item_function_path)
 
     # Predicate
     with open(os.path.join(namespace_path, 'predicates', subfolder, 'utils', 'hurt_time.json'), 'w') as hurt_time_json:
@@ -68,7 +64,7 @@ def generate(subdatapack: SubDatapack, entries: dict):
         """.strip())
 
     # Advancements
-    with open(os.path.join(namespace_path, 'advancements', subfolder, 'utils', 'look_at', 'player_hurt_entity.json'), 'w') as player_hurt_entity_json:
+    with open(os.path.join(namespace_path, 'advancements', subfolder, 'utils', 'melee_look_at', 'player_hurt_entity.json'), 'w') as player_hurt_entity_json:
         player_hurt_entity_json.write(f"""
 {{
     "criteria": {{
@@ -83,7 +79,10 @@ def generate(subdatapack: SubDatapack, entries: dict):
         """.strip())
 
     # Function
-    with open(os.path.join(namespace_path, 'functions', subfolder, 'look_at', 'player_hurt_entity.mcfunction'), 'a') as player_hurt_entity_file:
+    if not os.path.exists(os.path.join(namespace_path, 'functions', subfolder, 'melee_look_at', 'player_hurt_entity.mcfunction')):
+        with open(os.path.join(namespace_path, 'functions', subfolder, 'melee_look_at', 'player_hurt_entity.mcfunction'), 'w') as player_hurt_entity_file:
+            player_hurt_entity_file.write(f"advancement revoke @s only {namespace}:{subfolder}/utils/melee_look_at/player_hurt_entity")
+    with open(os.path.join(namespace_path, 'functions', subfolder, 'melee_look_at', 'player_hurt_entity.mcfunction'), 'a') as player_hurt_entity_file:
         player_hurt_entity_file.write('\n'+f"execute if entity @s[predicate={namespace}:{subfolder}/selecteditem/{item_name}] at @s anchored eyes run function {namespace}:{subfolder}/melee_look_at/{item_name}/init")  
     
     # Look At function

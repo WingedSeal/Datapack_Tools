@@ -109,27 +109,23 @@ def input_recipes(subdatapack: SubDatapack, entries: dict) -> None:
         recipe_frame = tk.LabelFrame(subdatapack.recipes_frame, padx=10, pady=5, text=f"Item {n+1}")
         recipe_frame.grid(row=row, column=column, padx=10, pady=10)
 
-        label = tk.Label(recipe_frame, text="Item's id: ")
-        label.grid(row=0, column=0, padx=5, pady=5, sticky=tk.E)
-        item_id_field = tk.Entry(recipe_frame, width=25)
-        item_id_field.grid(row=0, column=1, columnspan=2, padx=5, pady=5, sticky=tk.W)
+        tk.Label(recipe_frame, text="Item's id: ").grid(row=0, column=0, padx=5, pady=5, sticky=tk.E)
+        item_id_entry = tk.Entry(recipe_frame, width=25)
+        item_id_entry.grid(row=0, column=1, columnspan=2, padx=5, pady=5, sticky=tk.W)
 
-        label = tk.Label(recipe_frame, text="NBT: {" )
-        label.grid(row=1, column=0, padx=5, pady=5, sticky=tk.E)
-        item_nbt_field = tk.Entry(recipe_frame, width=30)
-        item_nbt_field.grid(row=1, column=1, padx=5, pady=5, sticky=tk.W)
-        label = tk.Label(recipe_frame, text="}")
-        label.grid(row=1, column=2, padx=5, pady=5, sticky=tk.E)
+        tk.Label(recipe_frame, text="NBT: {" ).grid(row=1, column=0, padx=5, pady=5, sticky=tk.E)
+        item_nbt_entry = tk.Entry(recipe_frame, width=30)
+        item_nbt_entry.grid(row=1, column=1, padx=5, pady=5, sticky=tk.W)
+        tk.Label(recipe_frame, text="}").grid(row=1, column=2, padx=5, pady=5, sticky=tk.E)
 
-        label = tk.Label(recipe_frame, text="Count: ")
-        label.grid(row=2, column=0, padx=5, pady=5, sticky=tk.E)
-        item_count_field = tk.Entry(recipe_frame, width=15)
-        item_count_field.grid(row=2, column=1, columnspan=2, padx=5, pady=5, sticky=tk.W)
+        tk.Label(recipe_frame, text="Count: ").grid(row=2, column=0, padx=5, pady=5, sticky=tk.E)
+        item_count_entry = tk.Entry(recipe_frame, width=15)
+        item_count_entry.grid(row=2, column=1, columnspan=2, padx=5, pady=5, sticky=tk.W)
         
         items_data.append({
-            'id': item_id_field,
-            'nbt': item_nbt_field,
-            'count': item_count_field
+            'id': item_id_entry,
+            'nbt': item_nbt_entry,
+            'count': item_count_entry
         })
 
     subdatapack.items_data = items_data
@@ -151,13 +147,13 @@ class CustomFloorCrafting:
         output_item_frame = tk.LabelFrame(subdatapack.window.root, padx=50, pady=20, text=f" Output item ")
         output_item_frame.pack(padx=10, pady=10)
 
-        tk.Label(output_item_frame, text="Item's name: ").grid(row=1, column=0, padx=5, pady=5, sticky=tk.E)
+        tk.Label(output_item_frame, text="Item's name: ").grid(row=0, column=0, padx=5, pady=5, sticky=tk.E)
         item_name_entry = tk.Entry(output_item_frame, width=30)
-        item_name_entry.grid(row=1, column=1, padx=5, pady=5)
+        item_name_entry.grid(row=0, column=1, padx=5, pady=5)
 
-        tk.Label(output_item_frame, text="Amount of type of item in the recipe: ").grid(row=2, column=0, padx=5, pady=5, sticky=tk.E)
+        tk.Label(output_item_frame, text="Amount of type of item in the recipe: ").grid(row=1, column=0, padx=5, pady=5, sticky=tk.E)
         type_entry = tk.Entry(output_item_frame, width=30)
-        type_entry.grid(row=2, column=1, padx=5, pady=5)
+        type_entry.grid(row=1, column=1, padx=5, pady=5)
 
         subdatapack.recipes_frame = tk.LabelFrame(subdatapack.window.root, padx=20, pady=10, text="Recipes")
         entries = {
