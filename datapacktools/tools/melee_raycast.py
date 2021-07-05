@@ -11,6 +11,9 @@ def float_range(start, stop, step) -> float:
     start += step
 
 def generate(subdatapack: SubDatapack, entries: dict):
+    for entry in entries:
+        if entry.get() == "":
+            return
     namespace = subdatapack.namespace
     namespace_path = subdatapack.namespace_path
     subfolder = subdatapack.subfolder_tk.get()
@@ -107,6 +110,10 @@ execute as @e[distance=..6,tag={namespace}.{item_name}.ray_casted,predicate={nam
 
     with open(os.path.join(item_function_path, 'exe.mcfunction'), 'w') as exe_file:
         exe_file.write(f'tag @s remove {namespace}.{item_name}.ray_casted\nsay [PLACEHOLDER]')
+
+    subdatapack.window.clear()
+    subdatapack.window.label(f'Melee Raycast is successfully generated under {namespace}/{subfolder} with item nbt: "{{{item_nbt}}}."', 16, (20,10))
+    subdatapack.pack_main_menu()
 
 class MeleeRaycast:
 

@@ -6,6 +6,9 @@ from . import path as _path
 
 
 def generate(subdatapack: SubDatapack, entries: dict):
+    for entry in entries:
+        if entry.get() == "":
+            return
     namespace = subdatapack.namespace
     namespace_path = subdatapack.namespace_path
     subfolder = subdatapack.subfolder_tk.get()

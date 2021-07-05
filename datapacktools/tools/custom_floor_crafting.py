@@ -19,10 +19,13 @@ def is_tick_valid(values: list, namespace: str, subfolder: str):
 
 
 def generate(subdatapack: SubDatapack, entries: dict) -> None:
+    for entry in entries:
+        if entry.get() == "":
+            return
     subfolder = subdatapack.subfolder_tk.get()
     namespace = subdatapack.namespace
     namespace_path = subdatapack.namespace_path 
-    output_item_name = entries['item_name'].get()
+    output_item_name = entries['item_name'].get().lower().replace(' ','_')
     
     recipes = []
     for item in subdatapack.items_data:
