@@ -1,13 +1,35 @@
 # Datapack Tools
-### for minecraft datapack
-    Make datapackers' life easier
+Datapack Tools is an executable(.exe) program being developed by me (WingedSeal) in python to help make datapackers' life easier by assisting them in the process of making datapack. It can be useful for both beginner and advance datapack developer.
 
-#### What is Datapack Tools?
-- Datapack Tool is a program being developed by me (WingedSeal) in python to help make datapackers' life easier. It can be useful for both beginner and advance datapack developer.
-- It can setup a clean new datapack for you, It can make melee raycast much easier. etc.
-- In fact, you can make a completely working datapack from the programs alone. ( Not like the said datapack will be useful though ).
-- Keep in mind that it's just a tool and you should still have basic knowledge of datapack and commands to use it properly. 
-- It is currently in an early development so you might expect a little bug here and there. I personally tested it multiple time and still found no major bug. But don't try pushing it to its limit by inputting stupid invalid data in there.
+## Installation
+All released versions are in the [release folder](https://github.com/WingedSeal/Datapack_Tools/tree/main/releases).
 
-#### Want to contribute?
-- I still have no idea how to use git and github. So... GL
+## Usage
+- Move the application into your datapack's directory.
+```
+./datapacks/<namespace>
+│
+├── data/
+│   ├── minecraft/
+│   └── <subfolder>
+│
+├── pack.mcmeta
+└── Datapack Tools.exe
+```
+- Run the program
+- If there's no datapack(data folder, pack.mcmeta) in the directory, the program will ask to generate one for you.
+- If there's a datapack in the directory, the program will let you choose the namespace you want.
+- Click on one of the features and choose the subfolder then input the necessary information.
+  
+### Features
+- Generate new datapack
+- Generate Custom floor crafting
+- Generate Custom crafting table recipe
+- Generate Melee Raycast
+- Generate Melee look_at  
+
+## Contributing
+I still have no idea how to use git and github. So... GL
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
