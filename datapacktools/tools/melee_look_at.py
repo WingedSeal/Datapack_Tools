@@ -32,8 +32,8 @@ def generate(subdatapack: SubDatapack, entries: dict):
     }
 }
         """.strip())
-    with open(os.path.join(namespace_path, 'predicates', subfolder, 'utils', 'look_at.json'), 'w') as hurt_time_json:
-        hurt_time_json.write(f"""
+    with open(os.path.join(namespace_path, 'predicates', subfolder, 'utils', 'melee_look_at.json'), 'w') as melee_look_at_json:
+        melee_look_at_json.write(f"""
 {{
     "condition": "minecraft:entity_properties",
     "entity": "this",
@@ -97,7 +97,7 @@ execute as @e[distance=..6,tag={namespace}.looked,limit=1,sort=nearest] at @s ru
     with open(os.path.join(item_function_path, 'look.mcfunction'), 'w') as look_file:
         look_file.write(f"""
 tag @s add {namespace}.potential_looked
-execute as @p[tag={namespace}.looker] if predicate {namespace}:{subfolder}/utils/melee_look_at run tag @e[limit=1,sort=nearest] add {namespace}.looked
+execute as @p[tag={namespace}.looker] if predicate {namespace}:{subfolder}/utils/melee_look_at run tag @e[limit=1,sort=nearest,tag={namespace}.potential_looked] add {namespace}.looked
 tag @s remove {namespace}.potential_looked
 """.strip()) 
 
