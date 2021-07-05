@@ -1,0 +1,3 @@
+#0.1.4
+ - Added "Melee Raycast" feature
+ - Changed 1 directory name (look_at -> melee_look_at)
