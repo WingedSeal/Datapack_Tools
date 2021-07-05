@@ -6,7 +6,7 @@ from . import path as _path
 
 
 def generate(subdatapack: SubDatapack, entries: dict):
-    for entry in entries:
+    for entry in entries.values():
         if entry.get() == "":
             return
     namespace = subdatapack.namespace
@@ -130,19 +130,19 @@ class MeleeLookAt:
 
         label = tk.Label(output_item_frame, text="Item's name: ")
         label.grid(row=0, column=0, padx=5, pady=5, sticky=tk.E)
-        item_name_field = tk.Entry(output_item_frame, width=25)
-        item_name_field.grid(row=0, column=1, columnspan=2, padx=5, pady=5, sticky=tk.W)
+        item_name_entry = tk.Entry(output_item_frame, width=25)
+        item_name_entry.grid(row=0, column=1, columnspan=2, padx=5, pady=5, sticky=tk.W)
 
         label = tk.Label(output_item_frame, text="NBT: {" )
         label.grid(row=1, column=0, padx=5, pady=5, sticky=tk.E)
-        item_nbt_field = tk.Entry(output_item_frame, width=30)
-        item_nbt_field.grid(row=1, column=1, padx=5, pady=5, sticky=tk.W)
+        item_nbt_entry = tk.Entry(output_item_frame, width=30)
+        item_nbt_entry.grid(row=1, column=1, padx=5, pady=5, sticky=tk.W)
         label = tk.Label(output_item_frame, text="}")
         label.grid(row=1, column=2, padx=5, pady=5, sticky=tk.E)
 
         entries = {
-            'item_name': item_name_field,
-            'item_nbt': item_nbt_field
+            'item_name': item_name_entry,
+            'item_nbt': item_nbt_entry
         }
 
         tk.Button(subdatapack.window.root, text="Generate", width=30, font=("", 16), command=lambda: generate(subdatapack, entries)).pack(padx=20, pady=10)

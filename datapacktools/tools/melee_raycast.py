@@ -11,7 +11,7 @@ def float_range(start, stop, step) -> float:
     start += step
 
 def generate(subdatapack: SubDatapack, entries: dict):
-    for entry in entries:
+    for entry in entries.values():
         if entry.get() == "":
             return
     namespace = subdatapack.namespace

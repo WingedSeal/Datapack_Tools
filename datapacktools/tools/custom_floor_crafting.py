@@ -19,7 +19,7 @@ def is_tick_valid(values: list, namespace: str, subfolder: str):
 
 
 def generate(subdatapack: SubDatapack, entries: dict) -> None:
-    for entry in entries:
+    for entry in entries.values():
         if entry.get() == "":
             return
     subfolder = subdatapack.subfolder_tk.get()
