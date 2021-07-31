@@ -1,26 +1,63 @@
-import datapacktools as dpt
 import os, sys
+import utils
+from datapack import Datapack
+from collections import defaultdict
+
+from kivy.app import App
+from kivy.clock import Clock
+from kivy.uix.widget import Widget
+from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
+from kivy.properties import BooleanProperty, ObjectProperty, StringProperty
+from kivy.lang import Builder
 
 EXE_DIRECTORY = os.path.dirname(sys.argv[0])
 
-def run(window: dpt.Window) -> None:
-    if not dpt.path.is_valid(EXE_DIRECTORY):
-        window.label("Current directory is not valid, please put this file under [ saves/<world>/datapacks/<datapack> ].",20,(20,20))
-        return
-    
-    datapack_name = dpt.path.datapack_name(EXE_DIRECTORY)
-    datapack = dpt.Datapack(EXE_DIRECTORY, datapack_name, window)
+def is_empty(path: str) -> bool:
+    files = os.listdir(path)
+    return ( 
+        'pack.mcmeta' not in files 
+        and
+        'data' not in files
+    )
 
-    if dpt.path.is_empty(EXE_DIRECTORY):
-        datapack.init()
-    else:
-        datapack.main()
+class MainWindow(Screen):
+    datapack = Datapack(EXE_DIRECTORY)
 
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
+        Clock.schedule_once(self.init, 1)
+
+    def init(self, *args) -> None:
+        if EXE_DIRECTORY.split(os.sep)[-2] != 'datapacks':
+            self.manager.transition = NoTransition()
+            self.manager.current = "path_invalid"
+            return
+        if is_empty(EXE_DIRECTORY):
+            self.manager.transition = NoTransition()
+            self.manager.current = "generate_datapack"
+            return
+        
+class GenerateDatapack(Screen):
+
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
+        self.optional_files = defaultdict(bool)
+
+    def test(self) -> None:
+        print(self.optional_files)
+
+    def checkbox_click(self, instance, value: bool, dictonary: dict, key: str):
+        dictonary[key] = value
+
+class TestWindow(Screen):
+    pass
+
+class MainApp(App):
+    def build(self):
+        return Builder.load_file(utils.resource_path("kivy", "main.kv"))
 
 def main() -> None:
-    window = dpt.Window("Datapack Tools by WingedSeal", dpt.utils.resource_path('icon.ico'))
-    run(window)
-    window.root.mainloop()
+    MainApp().run()
 
 if __name__ == "__main__":
     main()
