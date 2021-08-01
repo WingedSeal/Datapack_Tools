@@ -3,6 +3,7 @@ TEST/
 output/
 to_exe_config.json
 main_test.py
+.vscode/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
